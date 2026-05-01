@@ -3,7 +3,15 @@ import "./PokemonCard.css";
 
 const PokemonCard = ({ pokemon, onBuy }) => {
     return (
-        <article className="pokemon-card">
+        <article
+        className={`pokemon-card ${
+            pokemon.purchased ? "pokemon-card--purchased" : ""
+        }`}
+        >
+        {pokemon.purchased && (
+            <span className="pokemon-card__badge">Adquirida</span>
+        )}
+
         <div className="pokemon-card__image-container">
             <img
             src={pokemon.image}
@@ -26,10 +34,13 @@ const PokemonCard = ({ pokemon, onBuy }) => {
             <p className="pokemon-card__price">${pokemon.price}</p>
 
             <button
-            className="pokemon-card__button"
+            className={`pokemon-card__button ${
+                pokemon.purchased ? "pokemon-card__button--purchased" : ""
+            }`}
             onClick={() => onBuy(pokemon)}
+            disabled={pokemon.purchased}
             >
-            Comprar carta
+            {pokemon.purchased ? "Carta adquirida" : "Comprar carta"}
             </button>
         </div>
         </article>

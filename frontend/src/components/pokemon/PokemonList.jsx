@@ -4,6 +4,8 @@ import { getPokemons } from "../../services/pokemonService";
 import PurchaseModal from "../paypal/PurchaseModal";
 import "./PokemonList.css";
 
+const PURCHASED_CARDS_KEY = "purchasedPokemonCards";
+
 const PokemonList = () => {
     const [pokemons, setPokemons] = useState([]);
     const [selectedPokemon, setSelectedPokemon] = useState(null);
@@ -15,13 +17,50 @@ const PokemonList = () => {
         loadPokemons();
     }, []);
 
+    const getPurchasedCards = () => {
+        const storedCards = sessionStorage.getItem(PURCHASED_CARDS_KEY);
+
+        if (!storedCards) {
+        return [];
+        }
+
+        return JSON.parse(storedCards);
+    };
+
+    const savePurchasedCard = (pokemon) => {
+        const purchasedCards = getPurchasedCards();
+
+        const alreadyExists = purchasedCards.some((card) => card.id === pokemon.id);
+
+        if (alreadyExists) {
+        return;
+        }
+
+        const updatedCards = [...purchasedCards, pokemon];
+
+        sessionStorage.setItem(PURCHASED_CARDS_KEY, JSON.stringify(updatedCards));
+    };
+
     const loadPokemons = async () => {
         try {
         setLoading(true);
         setErrorMessage("");
 
         const data = await getPokemons(12);
-        setPokemons(data);
+        const purchasedCards = getPurchasedCards();
+
+        const pokemonsWithPurchaseState = data.map((pokemon) => {
+            const isPurchased = purchasedCards.some(
+            (card) => card.id === pokemon.id
+            );
+
+            return {
+            ...pokemon,
+            purchased: isPurchased,
+            };
+        });
+
+        setPokemons(pokemonsWithPurchaseState);
         } catch (error) {
         setErrorMessage("No se pudieron cargar las cartas Pokémon.");
         } finally {
@@ -30,6 +69,13 @@ const PokemonList = () => {
     };
 
     const handlePurchaseSuccess = (pokemon) => {
+        const purchasedPokemon = {
+        ...pokemon,
+        purchased: true,
+        };
+
+        savePurchasedCard(purchasedPokemon);
+
         setPurchaseMessage(`Compra exitosa: ${pokemon.name} fue desbloqueado.`);
 
         setPokemons((currentPokemons) =>

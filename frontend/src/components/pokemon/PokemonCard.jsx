@@ -1,7 +1,7 @@
 import React from "react";
 import "./PokemonCard.css";
 
-const PokemonCard = ({ pokemon }) => {
+const PokemonCard = ({ pokemon, onBuy }) => {
     return (
         <article className="pokemon-card">
         <div className="pokemon-card__image-container">
@@ -25,7 +25,12 @@ const PokemonCard = ({ pokemon }) => {
 
             <p className="pokemon-card__price">${pokemon.price}</p>
 
-            <button className="pokemon-card__button">Comprar carta</button>
+            <button
+            className="pokemon-card__button"
+            onClick={() => onBuy(pokemon)}
+            >
+            Comprar carta
+            </button>
         </div>
         </article>
     );

@@ -22,7 +22,7 @@ const PurchaseModal = ({ pokemon, onClose, onPurchaseSuccess, onPurchaseError })
 
                 <div className="purchase-modal__payment">
                     <h3>Finalizar compra</h3>
-                    <p>Usa PayPal Sandbox para desbloquear esta carta.</p>
+                    <p>Haz la compra para poder desbloquear esta carta.</p>
 
                     <PaypalButton pokemon={pokemon} onSuccess={onPurchaseSuccess} onError={onPurchaseError} />
                 </div>

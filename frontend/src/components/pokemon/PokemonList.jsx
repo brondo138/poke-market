@@ -46,7 +46,7 @@ const PokemonList = () => {
         setLoading(true);
         setErrorMessage("");
 
-        const data = await getPokemons(12);
+        const data = await getPokemons(25);
         const purchasedCards = getPurchasedCards();
 
         const pokemonsWithPurchaseState = data.map((pokemon) => {

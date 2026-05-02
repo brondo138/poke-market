@@ -1,0 +1,39 @@
+.pokemon-card--rare {
+    background: linear-gradient(180deg, #0b2f4a, #04111f);
+    border: 1px solid rgba(56, 189, 248, 0.55);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.38);
+}
+
+.pokemon-card--rare:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 42px rgba(56, 189, 248, 0.38);
+}
+
+.pokemon-card--rare .pokemon-card__image-container {
+    background: radial-gradient(
+        circle,
+        rgba(56, 189, 248, 0.42),
+        rgba(14, 116, 144, 0.22) 45%,
+        transparent 72%
+    );
+}
+
+.pokemon-card--rare .pokemon-card__type {
+    background: rgba(56, 189, 248, 0.16);
+    color: #bae6fd;
+    border: 1px solid rgba(125, 211, 252, 0.48);
+}
+
+.pokemon-card--rare .pokemon-card__price {
+    color: #7dd3fc;
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.45);
+}
+
+.pokemon-card--rare .pokemon-card__button {
+    background: linear-gradient(135deg, #38bdf8, #0369a1);
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.4);
+}
+
+.pokemon-card--rare .pokemon-card__button:hover {
+    box-shadow: 0 0 28px rgba(125, 211, 252, 0.65);
+}

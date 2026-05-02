@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./CollectionPage.css";
+import PokemonCard from "../components/pokemon/PokemonCard";
 
 const PURCHASED_CARDS_KEY = "purchasedPokemonCards";
 
@@ -14,8 +15,8 @@ const CollectionPage = () => {
         const storedCards = sessionStorage.getItem(PURCHASED_CARDS_KEY);
 
         if (!storedCards) {
-        setPurchasedCards([]);
-        return;
+            setPurchasedCards([]);
+            return;
         }
 
         setPurchasedCards(JSON.parse(storedCards));
@@ -23,47 +24,33 @@ const CollectionPage = () => {
 
     return (
         <section id="coleccion" className="collection-page">
-        <div className="collection-page__header">
-            <span>Mi colección</span>
-            <h2>Cartas adquiridas</h2>
-        </div>
-
-        {purchasedCards.length === 0 ? (
-            <div className="collection-page__empty">
-            <h3>Aún no tienes cartas adquiridas</h3>
-            <p>
-                Compra una carta desde el catálogo para que aparezca en tu colección.
-            </p>
+            <div className="collection-page__header">
+                <span>Mi colección</span>
+                <h2>Cartas adquiridas</h2>
             </div>
-        ) : (
-            <div className="collection-page__grid">
-            {purchasedCards.map((card) => (
-                <article key={card.id} className="collection-card">
-                <span className="collection-card__badge">Desbloqueada</span>
 
-                <div className="collection-card__image-container">
-                    <img
-                    src={card.image}
-                    alt={card.name}
-                    className="collection-card__image"
-                    />
+            {purchasedCards.length === 0 ? (
+                <div className="collection-page__empty">
+                    <h3>Aún no tienes cartas adquiridas</h3>
+                    <p>
+                        Compra una carta desde el catálogo para que aparezca en tu colección.
+                    </p>
                 </div>
-
-                <div className="collection-card__content">
-                    <h3>{card.name}</h3>
-
-                    <div className="collection-card__types">
-                    {card.types.map((type) => (
-                        <span key={type}>{type}</span>
+            ) : (
+                <div className="collection-page__grid">
+                    {purchasedCards.map((card) => (
+                        <PokemonCard
+                            key={card.id}
+                            pokemon={{
+                                ...card,
+                                purchased: true,
+                            }}
+                            showButton={false}
+                            badgeText="Desbloqueada"
+                        />
                     ))}
-                    </div>
-
-                    <p className="collection-card__price">${card.price}</p>
                 </div>
-                </article>
-            ))}
-            </div>
-        )}
+            )}
         </section>
     );
 };

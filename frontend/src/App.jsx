@@ -1,17 +1,22 @@
+import { useState } from "react";
 import Navbar from "./components/navbar/Navbar";
 import HomePage from "./pages/HomePage";
-import "./App.css";
+import CollectionPage from "./pages/CollectionPage";
 import Footer from "./components/footer/Footer";
+import "./App.css";
 
 function App() {
+  const [activePage, setActivePage] = useState("home");
+
   return (
     <div className="app">
-      <Navbar />
+      <Navbar setActivePage={setActivePage} />
 
       <main className="main-content">
-        <HomePage />
+        {activePage === "home" && <HomePage />}
+        {activePage === "collection" && <CollectionPage />}
       </main>
-      
+
       <Footer />
     </div>
   );

@@ -2,11 +2,21 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import { Store, Menu, X } from "lucide-react";
 
-const Navbar = () => {
+const Navbar = ({ setActivePage }) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const closeMenu = () => {
+    const goToPage = (page, sectionId = null) => {
+        setActivePage(page);
         setIsOpen(false);
+
+        setTimeout(() => {
+            if (sectionId) {
+            const section = document.getElementById(sectionId);
+            section?.scrollIntoView({ behavior: "smooth" });
+            } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        }, 100);
     };
 
     return (
@@ -28,14 +38,11 @@ const Navbar = () => {
 
         <nav className={`navbar__menu ${isOpen ? "navbar__menu--open" : ""}`}>
             <div className="navbar__links">
-            <a href="#inicio" onClick={closeMenu}>Inicio</a>
-            <a href="#catalogo" onClick={closeMenu}>Catálogo</a>
-            <a href="#coleccion" onClick={closeMenu}>Mis Cartas</a>
+            <button onClick={() => goToPage("home")}>Inicio</button>
+            <button onClick={() => goToPage("home", "catalogo")}>Catálogo</button>
+            <button onClick={() => goToPage("collection")}>Mis Cartas</button>
             </div>
 
-            <button className="navbar__button" onClick={closeMenu}>
-            Ver colección
-            </button>
         </nav>
         </header>
     );

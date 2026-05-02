@@ -104,7 +104,7 @@ const PokemonList = () => {
         <div className="pokemon-list__header">
             <span>Catálogo</span>
             <h2>Cartas disponibles</h2>
-            <p>Explora cartas coleccionables generadas desde la PokéAPI.</p>
+            <p>Explora cartas coleccionables.</p>
         </div>
 
         {purchaseMessage && (

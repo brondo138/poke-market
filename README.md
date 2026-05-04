@@ -297,6 +297,22 @@ Para guardar las cartas adquiridas se puede utilizar almacenamiento del navegado
 
 ---
 
+# Credenciales de pruebas
+Credenciales de cuenta creada
+Correo: 
+```
+gatow65600@gixpos.com
+```
+
+Contraseña:
+```
+tozhoc$0neVqo$mokcoh
+```
+
+De igual manera, se puede crear una cuenta con fines de prueba, por lo que no es necesario ingresar datos reales. Si solicita un número o código de teléfono, se puede completar colocando únicamente el número 2 en todos los campos.
+
+---
+
 # Flujo del sistema
 
 1. El usuario entra a la tienda de cartas.
